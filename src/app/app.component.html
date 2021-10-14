@@ -6,6 +6,17 @@
   <label for="number-of-suppliers">number of suppliers: </label>
   <input id="number-of-suppliers" (keypress)="keyPressNumbers($event)" type="text" formControlName="numberOfSuppliers" >
   <br>
+  <div class="alert alert-danger" role="alert" *ngIf="formError !== undefined">{{formError}}</div>
+  <br>
+  <mat-checkbox formControlName="nordOvestMethod" >Nord - Ovest</mat-checkbox>
+  <br>
+  <mat-checkbox formControlName="minimiCostiMethod" >Minimi costi</mat-checkbox>
+  <br>
+  <mat-checkbox formControlName="vogelMethod" >Vogel</mat-checkbox>
+  <br>
+  <mat-checkbox formControlName="russelMethod" >Russel</mat-checkbox>
+  <br>
+  <br>
   <button class="button" type="submit">submit</button>
 
 </form>

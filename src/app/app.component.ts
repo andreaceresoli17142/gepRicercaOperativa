@@ -8,6 +8,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AppComponent {
   title = 'GEP';
+  formError: string | undefined = undefined;
 
   numberOfShops: number | undefined = undefined;
   numberOfSuppliers: number | undefined = undefined
@@ -15,6 +16,10 @@ export class AppComponent {
   inputForm = new FormGroup({
     numberOfShops: new FormControl(''),
     numberOfSuppliers: new FormControl(''),
+    nordOvestMethod: new FormControl(false),
+    minimiCostiMethod: new FormControl(false),
+    vogelMethod: new FormControl(false),
+    russelMethod: new FormControl(false),
   });
 
   keyPressNumbers(event: any) {
@@ -29,13 +34,24 @@ export class AppComponent {
   }
 
   dataSubmit(){
-    console.log( this.inputForm.value );
     var formOutput = this.inputForm.value ;
     if ( formOutput.numberOfShops == '' || formOutput.numberOfSuppliers == '' ){
-      this.inputForm.setValue( { numberOfShops:'', numberOfSuppliers: '' } );
+      this.inputForm.setValue( { numberOfShops:'', numberOfSuppliers: '', nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false } );
+      this.formError = "please insert both the number of shops and the number of suppliers";
       return;
     }
 
+    if ( formOutput.nordOvestMethod == false && formOutput.minimiCostiMethod == false && formOutput.vogelMethod == false && formOutput.russelMethod == false ){
+      this.inputForm.setValue( { numberOfShops:'', numberOfSuppliers: '', nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false } );
+      this.formError = "please select at least one method";
+      return;
+    }
+
+    this.formError = undefined;
+
+    console.log( this.inputForm.value );
   }
+
+
 
 }
