@@ -1,0 +1,10 @@
+<div *ngIf="headers != undefined">
+  <table id="users">
+    <tr>
+      <th *ngFor = "let column of headers">
+        {{column}}
+      </th>
+    </tr>
+
+  </table>
+</div>

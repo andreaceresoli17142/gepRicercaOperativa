@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,9 @@ export class AppComponent {
   formError: string | undefined = undefined;
 
   numberOfShops: number | undefined = undefined;
-  numberOfSuppliers: number | undefined = undefined
+  numberOfSuppliers: number | undefined = undefined;
+
+  toChildForm: any = undefined;
 
   inputForm = new FormGroup({
     numberOfShops: new FormControl(''),
@@ -36,20 +38,28 @@ export class AppComponent {
   dataSubmit(){
     var formOutput = this.inputForm.value ;
     if ( formOutput.numberOfShops == '' || formOutput.numberOfSuppliers == '' ){
-      this.inputForm.setValue( { numberOfShops:'', numberOfSuppliers: '', nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false } );
       this.formError = "please insert both the number of shops and the number of suppliers";
+      return;
+    }
+    if ( isNaN(Number(formOutput.numberOfShops)) || isNaN(Number(formOutput.numberOfSuppliers)) ){
+      this.formError = "please insert only numbers in the number of shops and the number of suppliers";
+      this.inputForm.setValue( { numberOfShops:'', numberOfSuppliers: '', nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false });
       return;
     }
 
     if ( formOutput.nordOvestMethod == false && formOutput.minimiCostiMethod == false && formOutput.vogelMethod == false && formOutput.russelMethod == false ){
-      this.inputForm.setValue( { numberOfShops:'', numberOfSuppliers: '', nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false } );
       this.formError = "please select at least one method";
       return;
     }
 
     this.formError = undefined;
 
-    console.log( this.inputForm.value );
+    //console.log( this.inputForm.value );
+    //pass data to other angular component
+
+    this.toChildForm = this.inputForm.value;
+
+    this.inputForm.setValue( { numberOfShops:'', numberOfSuppliers: '', nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false } );
   }
 
 
