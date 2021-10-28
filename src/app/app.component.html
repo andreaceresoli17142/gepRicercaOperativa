@@ -1,10 +1,13 @@
 <form [formGroup]="inputForm" (ngSubmit)="dataSubmit()" >
 
   <label for="number-of-shops">number of shops: </label>
-  <input id="number-of-shops" (keypress)="keyPressNumbers($event)" type="text" formControlName="numberOfShops" >
+  <input id="number-of-shops" type="number" formControlName="numberOfShops" >
   <br>
   <label for="number-of-suppliers">number of suppliers: </label>
-  <input id="number-of-suppliers" (keypress)="keyPressNumbers($event)" type="text" formControlName="numberOfSuppliers" >
+  <input id="number-of-suppliers" type="number" formControlName="numberOfSuppliers" >
+  <br>
+  <label for="total-resources">total resources (optional): </label>
+  <input id="total-resources" type="number" formControlName="totalResources" >
   <br>
   <div class="alert alert-danger" role="alert" *ngIf="formError !== undefined">{{formError}}</div>
   <br>

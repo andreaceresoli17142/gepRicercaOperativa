@@ -16,36 +16,32 @@ export class AppComponent {
   toChildForm: any = undefined;
 
   inputForm = new FormGroup({
-    numberOfShops: new FormControl(''),
-    numberOfSuppliers: new FormControl(''),
+    numberOfShops: new FormControl(0),
+    numberOfSuppliers: new FormControl(0),
+    totalResources: new FormControl(''),
     nordOvestMethod: new FormControl(false),
     minimiCostiMethod: new FormControl(false),
     vogelMethod: new FormControl(false),
     russelMethod: new FormControl(false),
   });
 
-  keyPressNumbers(event: any) {
-    var charCode = (event.which) ? event.which : event.keyCode;
-    // Only Numbers 0-9
-    if ((charCode < 48 || charCode > 57)) {
-      event.preventDefault();
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   dataSubmit(){
     var formOutput = this.inputForm.value ;
-    if ( formOutput.numberOfShops == '' || formOutput.numberOfSuppliers == '' ){
-      this.formError = "please insert both the number of shops and the number of suppliers";
+    if ( formOutput.numberOfShops < 1 || formOutput.numberOfSuppliers < 1 ){
+      this.formError = "both the number of shops and the number of suppliers must be greater then 1";
       return;
     }
-    if ( isNaN(Number(formOutput.numberOfShops)) || isNaN(Number(formOutput.numberOfSuppliers)) ){
-      this.formError = "please insert only numbers in the number of shops and the number of suppliers";
-      this.inputForm.setValue( { numberOfShops:'', numberOfSuppliers: '', nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false });
+
+    if ( formOutput.totalResources < formOutput.numberOfShop || formOutput.totalResources < formOutput.numberOfSuppliers  ){
+      this.formError = "there must be at least one resource per shop and suppluer";
       return;
     }
+
+    // if ( isNaN(Number(formOutput.numberOfShops)) || isNaN(Number(formOutput.numberOfSuppliers)) ){
+    //   this.formError = "please insert only numbers in the number of shops and the number of suppliers";
+    //   this.inputForm.setValue( { numberOfShops:0, numberOfSuppliers: 0, nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false });
+    //   return;
+    // }
 
     if ( formOutput.nordOvestMethod == false && formOutput.minimiCostiMethod == false && formOutput.vogelMethod == false && formOutput.russelMethod == false ){
       this.formError = "please select at least one method";
@@ -59,9 +55,7 @@ export class AppComponent {
 
     this.toChildForm = this.inputForm.value;
 
-    this.inputForm.setValue( { numberOfShops:'', numberOfSuppliers: '', nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false } );
+    this.inputForm.setValue( { numberOfShops:0, numberOfSuppliers: 0, totalResources: '', nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false } );
   }
-
-
 
 }

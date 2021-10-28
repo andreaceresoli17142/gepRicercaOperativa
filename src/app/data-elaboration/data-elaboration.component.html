@@ -1,10 +1,30 @@
-<div *ngIf="headers != undefined">
+<div *ngIf="dataTable.filled">
   <table id="users">
-    <tr>
-      <th *ngFor = "let column of headers">
-        {{column}}
-      </th>
-    </tr>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th *ngFor = "let column of dataTable.columnHeaders">
+          {{column}}
+        </th>
+        <th>total</th>
+      </tr>
+    </thead>
 
+    <tbody>
+      <tr *ngFor = "let row of dataTable.transportCostMatrix; index as i" >
+        <th> {{dataTable.rowHeaders[i]}} </th>
+        <td *ngFor = "let column of row" >
+          {{column}}
+        </td>
+        <td> {{dataTable.sellersTotal[i]}} </td>
+      </tr>
+      <tr>
+        <th>total</th>
+        <td *ngFor = "let singleBuyerRequest of dataTable.buyersTotal" >
+          {{singleBuyerRequest}}
+        </td>
+        <td>{{dataTable.totalResources}}</td>
+      </tr>
+    </tbody>
   </table>
 </div>
