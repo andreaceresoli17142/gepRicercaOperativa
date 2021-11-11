@@ -16,10 +16,10 @@ export class AppComponent {
   toChildForm: any = undefined;
 
   inputForm = new FormGroup({
-    numberOfShops: new FormControl(0),
-    numberOfSuppliers: new FormControl(0),
-    totalResources: new FormControl(''),
-    nordOvestMethod: new FormControl(false),
+    numberOfShops: new FormControl(3),
+    numberOfSuppliers: new FormControl(3),
+    totalResources: new FormControl(300),
+    nordOvestMethod: new FormControl(true),
     minimiCostiMethod: new FormControl(false),
     vogelMethod: new FormControl(false),
     russelMethod: new FormControl(false),

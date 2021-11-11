@@ -88,5 +88,24 @@ export class table{
     return Math.floor(Math.random()* (maxNum - minNum))+minNum ;
   }
 
+  public removeRow( i:number ){
+    this.transportCostMatrix.splice(i,1);
+    this.sellersTotal.splice(i,1);
+    this.rowHeaders.splice(i,1);
+  }
+
+  public removeColumn( i:number ){
+    for (const row of this.transportCostMatrix) {
+      row.splice(i,1);
+    }
+    this.buyersTotal.splice(i,1);
+    this.columnHeaders.splice(i,1);
+  }
+
+  public debug(){
+
+    console.log( this.transportCostMatrix );
+
+  }
 
 }
