@@ -24,4 +24,8 @@
 
 </form>
 
-<app-data-elaboration [formInput]="toChildForm" ></app-data-elaboration>
+<br>
+<app-data-elaboration *ngIf="nordOvestMethodFlag" [formInput]="toChildForm"></app-data-elaboration>
+
+<br>
+<app-minimi-costi *ngIf="minimiCostiMethodFlag" [formInput]="toChildForm"></app-minimi-costi>

@@ -1,11 +1,11 @@
 export class table{
-  filled:boolean;
-  rowHeaders:any = [];
-  columnHeaders:any = [];
-  buyersTotal:any = [];
-  sellersTotal:any = [];
-  transportCostMatrix: any = [];
-  totalResources:number;
+  public filled:boolean;
+  public rowHeaders:any = [];
+  public columnHeaders:any = [];
+  public buyersTotal:any = [];
+  public sellersTotal:any = [];
+  public transportCostMatrix: any = [];
+  public totalResources:number;
 
   constructor( sellers?: number, buyers?: number, totalResources?: number) {
 
@@ -48,7 +48,7 @@ export class table{
     for( let i = 0; i < sellers!; i++ ){
       tempMat.push( [] );
       for( let t = 1; t < buyers!+1; t++ ){
-        tempMat[i].push(Math.floor(Math.random() * 100 ));
+        tempMat[i].push(Math.floor(Math.random() * 99 )+1);
       }
       // tempMat[i].push( sellersReq[i] );
     }
@@ -102,9 +102,40 @@ export class table{
     this.columnHeaders.splice(i,1);
   }
 
+  public findSmallestTransport(){
+    var minValue = 100;
+    var buyerI = 0;
+    var sellerI = 0;
+
+    for ( let i = 0; i < this.sellersTotal.length; i++ ){
+      for ( let t = 0; t < this.buyersTotal.length; t++ ){
+        if ( this.transportCostMatrix[i][t] < minValue ){
+          minValue = this.transportCostMatrix[i][t];
+          sellerI = i;
+          buyerI = t;
+        }
+      }
+    }
+    return [ sellerI, buyerI ];
+  }
+
+  public clone( ){
+    var newObj = new table(1,1);
+    newObj.filled = this.filled;
+    newObj.rowHeaders = this.rowHeaders;
+    newObj.columnHeaders = this.columnHeaders;
+    newObj.buyersTotal = this.buyersTotal;
+    newObj.sellersTotal = this.sellersTotal;
+    newObj.transportCostMatrix = this.transportCostMatrix;
+    newObj.totalResources = this.totalResources;
+    return newObj;
+  }
+
   public debug(){
 
-    console.log( this.transportCostMatrix );
+    // for (let i = 0; i < this.rowHeaders.length; i++) {
+    //   console.
+    // }
 
   }
 

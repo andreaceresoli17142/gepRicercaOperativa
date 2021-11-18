@@ -11,11 +11,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataElaborationComponent } from './data-elaboration/data-elaboration.component';
+import { MinimiCostiComponent } from './minimi-costi/minimi-costi.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DataElaborationComponent
+    DataElaborationComponent,
+    MinimiCostiComponent
   ],
   imports: [
     NgbModule,

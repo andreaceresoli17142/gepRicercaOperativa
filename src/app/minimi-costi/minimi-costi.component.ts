@@ -3,15 +3,12 @@ import {table} from 'src/assets/tableClass';
 import { Util } from 'src/assets/utilClass';
 
 @Component({
-  selector: 'app-data-elaboration',
-  templateUrl: './data-elaboration.component.html',
-  styleUrls: ['./data-elaboration.component.css']
+  selector: 'app-minimi-costi',
+  templateUrl: './minimi-costi.component.html',
+  styleUrls: ['./minimi-costi.component.css']
 })
+export class MinimiCostiComponent implements OnInit {
 
-export class DataElaborationComponent implements OnInit {
-  // matrix:any = undefined;
-  // columnHeaders:any = undefined;
-  // rowHeaders:any = undefined;
   dataTable: table = new table();
   totalCost: number = 0;
   util!: Util;
@@ -20,29 +17,32 @@ export class DataElaborationComponent implements OnInit {
   set formInput(input:any){
     if ( input != undefined ){
       this.dataTable = input.clone();
-    //   if ( input.totalResources == '' )
-    //     this.dataTable = new table( parseInt(input.numberOfShops), parseInt(input.numberOfShops));
-    //   else
-    //     this.dataTable = new table( parseInt(input.numberOfShops), parseInt(input.numberOfShops), parseInt(input.totalResources));
-
-      // this.executeIter();
+      // if ( input.totalResources == '' )
+      //   this.dataTable = new table( parseInt(input.numberOfShops), parseInt(input.numberOfShops));
+      // else
+      //   this.dataTable = new table( parseInt(input.numberOfShops), parseInt(input.numberOfShops), parseInt(input.totalResources));
+    // this.executeIter();
     }
   }
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
   async executeIter(){
-    // console.log( "started" );
-    // await new Promise(resolve => setTimeout(resolve, 2000));
-
     var dataTable = this.dataTable;
     var buyerI = 0;
     var sellerI = 0;
 
+    // await new Promise(resolve => setTimeout(resolve, 2000));
+
     // while( dataTable.sellersTotal.length != 0 && dataTable.buyersTotal != 0 ){
+      let selectedIndexes = dataTable.findSmallestTransport();
+      // console.log( selectedIndexes);
+      sellerI = selectedIndexes[0];
+      buyerI = selectedIndexes[1];
       // se la richiesta é uguale o inferiore della domanda soddisfiamo completamente la richiesta con in primo venditore disponibile
       let tobuy = dataTable.buyersTotal[buyerI];
 
@@ -67,11 +67,10 @@ export class DataElaborationComponent implements OnInit {
       dataTable.buyersTotal[buyerI] -= dataTable.sellersTotal[sellerI];
       dataTable.removeRow(sellerI);
 
-    //   await new Promise(resolve => setTimeout(resolve, 2000));
+      // await new Promise(resolve => setTimeout(resolve, 2000));
     // }
     dataTable.debug();
-    console.log( "endend nord ovest" );
+    console.log( "endend minimi costi" );
 
   }
-
 }

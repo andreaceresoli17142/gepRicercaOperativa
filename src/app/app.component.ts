@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { table } from 'src/assets/tableClass';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,11 @@ export class AppComponent {
 
   numberOfShops: number | undefined = undefined;
   numberOfSuppliers: number | undefined = undefined;
+  nordOvestMethodFlag = false;
+  minimiCostiMethodFlag = false;
+  vogelMethodFlag = false;
+  russelMethodFlag = false;
+
 
   toChildForm: any = undefined;
 
@@ -20,7 +26,7 @@ export class AppComponent {
     numberOfSuppliers: new FormControl(3),
     totalResources: new FormControl(300),
     nordOvestMethod: new FormControl(true),
-    minimiCostiMethod: new FormControl(false),
+    minimiCostiMethod: new FormControl(true),
     vogelMethod: new FormControl(false),
     russelMethod: new FormControl(false),
   });
@@ -53,7 +59,19 @@ export class AppComponent {
     //console.log( this.inputForm.value );
     //pass data to other angular component
 
-    this.toChildForm = this.inputForm.value;
+    // this.toChildForm = this.inputForm.value;
+    if ( formOutput.totalResources == '' ){
+      this.toChildForm = new table( parseInt(formOutput.numberOfShops), parseInt(formOutput.numberOfShops));
+    }else{
+      this.toChildForm = new table( parseInt(formOutput.numberOfShops), parseInt(formOutput.numberOfShops), parseInt(formOutput.totalResources));
+    }
+    // this.toChildForm = new table( numberOfShops:0, numberOfSuppliers: 0, totalResources: '' );
+
+
+    this.nordOvestMethodFlag = this.inputForm.value.nordOvestMethod;
+    this.minimiCostiMethodFlag = this.inputForm.value.minimiCostiMethod;
+    this.vogelMethodFlag = this.inputForm.value.vogelMethod;
+    this.russelMethodFlag = this.inputForm.value.russelMethod;
 
     this.inputForm.setValue( { numberOfShops:0, numberOfSuppliers: 0, totalResources: '', nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false } );
   }

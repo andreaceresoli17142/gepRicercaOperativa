@@ -1,7 +1,6 @@
-
 <div *ngIf="dataTable.filled">
-  <h3> nord-ovest method</h3>
-  <table *ngIf="dataTable.sellersTotal.length != 0 && dataTable.buyersTotal != 0"  id="users">
+  <h3> minimi-costi method</h3>
+  <table *ngIf="dataTable.sellersTotal.length != 0 && dataTable.buyersTotal != 0" id="users">
     <thead>
       <tr>
         <th>#</th>
@@ -32,5 +31,6 @@
   total cost:{{totalCost}}
 </div>
 
-<br>
-<button (click)="executeIter()" >execute iter</button>
+
+
+<button (click)="executeIter()" > run one iteration </button>
