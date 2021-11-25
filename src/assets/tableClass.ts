@@ -7,10 +7,10 @@ export class table{
   public transportCostMatrix: any = [];
   public totalResources:number;
 
+  // public constructor( args[] )
   public constructor( copiedData?:string, sellers?: number, buyers?: number, totalResources?: number) {
 
     if ( copiedData != undefined ){
-
       let p = JSON.parse(copiedData);
       this.filled = p.filled;
       this.rowHeaders = p.rowHeaders;
@@ -42,7 +42,8 @@ export class table{
     this.buyersTotal = this.splitNumberInSubnumbers( this.totalResources, buyers! )
     this.sellersTotal = this.splitNumberInSubnumbers( this.totalResources, sellers! )
 
-    for( let i = 0; i < buyers!; i++ ){
+
+    for( let i = 1; i <= buyers!; i++ ){
       tempMat.push( "B" + i );
     }
 
@@ -50,7 +51,7 @@ export class table{
 
     tempMat = [];
 
-    for( let i = 0; i < sellers!; i++ ){
+    for( let i = 1; i <= sellers!; i++ ){
       tempMat.push( "S" + i );
     }
 
@@ -60,7 +61,7 @@ export class table{
 
     for( let i = 0; i < sellers!; i++ ){
       tempMat.push( [] );
-      for( let t = 1; t < buyers!+1; t++ ){
+      for( let t = 0; t < buyers!; t++ ){
         tempMat[i].push(Math.floor(Math.random() * 99 )+1);
       }
       // tempMat[i].push( sellersReq[i] );

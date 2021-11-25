@@ -26,7 +26,7 @@ export class AppComponent {
     numberOfSuppliers: new FormControl(3),
     totalResources: new FormControl(300),
     nordOvestMethod: new FormControl(true),
-    minimiCostiMethod: new FormControl(true),
+    minimiCostiMethod: new FormControl(false),
     vogelMethod: new FormControl(false),
     russelMethod: new FormControl(false),
   });

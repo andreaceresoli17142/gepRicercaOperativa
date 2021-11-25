@@ -20,56 +20,49 @@ export class DataElaborationComponent implements OnInit {
   set formInput(input:any){
     if ( input != undefined ){
       this.dataTable = new table(input);
-    //   if ( input.totalResources == '' )
-    //     this.dataTable = new table( parseInt(input.numberOfShops), parseInt(input.numberOfShops));
-    //   else
-    //     this.dataTable = new table( parseInt(input.numberOfShops), parseInt(input.numberOfShops), parseInt(input.totalResources));
-
       this.executeIter();
     }
   }
 
   constructor() { }
-
+  
   ngOnInit(): void {
   }
-
+  
   async executeIter(){
-    // console.log( "started" );
     await new Promise(resolve => setTimeout(resolve, 2000));
-
+    
     var dataTable = this.dataTable;
     var buyerI = 0;
     var sellerI = 0;
-
-    while( dataTable.sellersTotal.length != 0 && dataTable.buyersTotal != 0 ){
+    let totalSold = 0;
+    while( dataTable.sellersTotal.length > 0 && dataTable.buyersTotal.length > 0 ){
+      // console.log(`sellers lenght is ${dataTable.sellersTotal.length} and buyers lenght is ${dataTable.buyersTotal.length}`);
       // se la richiesta é uguale o inferiore della domanda soddisfiamo completamente la richiesta con in primo venditore disponibile
       let tobuy = dataTable.buyersTotal[buyerI];
 
-      // console.log ( "B"+buyerI+" requested: " + dataTable.buyersTotal[buyerI] )
-      // console.log ( "S"+sellerI+" given: " + dataTable.sellersTotal[sellerI] )
-
       if ( tobuy <= dataTable.sellersTotal[sellerI] ){
-
+        // console.log(`buyer is going to buy ${tobuy} and seller is going to sell ${tobuy}`);
+        // totalSold += tobuy;
         this.totalCost += tobuy * dataTable.transportCostMatrix[sellerI][buyerI];
         dataTable.removeColumn(buyerI);
         if( dataTable.sellersTotal[sellerI] == tobuy){
           dataTable.removeRow(sellerI);
         }
         dataTable.sellersTotal[sellerI] -=tobuy;
-        // dataTable.debug();
         continue;
         // return;
       }
-
       // se la richiesta é maggiore della domanda soddisfiamo la massima quantià che possiamo con il primo venditore disponibile
       this.totalCost += dataTable.sellersTotal[sellerI] * dataTable.transportCostMatrix[sellerI][buyerI];
       dataTable.buyersTotal[buyerI] -= dataTable.sellersTotal[sellerI];
+      // totalSold += dataTable.sellersTotal[sellerI];
+      // console.log(`buyer is going to buy ${dataTable.sellersTotal[sellerI]} and seller is going to sell ${dataTable.sellersTotal[sellerI]}`);
       dataTable.removeRow(sellerI);
 
       await new Promise(resolve => setTimeout(resolve, 2000));
     }
-    // dataTable.debug();
+    // console.log( `total sold is ${totalSold}` );
     console.log( "endend nord ovest" );
 
   }
