@@ -16,12 +16,12 @@ export class MinimiCostiComponent implements OnInit {
   @Input()
   set formInput(input:any){
     if ( input != undefined ){
-      this.dataTable = input.clone();
+      this.dataTable = new table(input);
       // if ( input.totalResources == '' )
       //   this.dataTable = new table( parseInt(input.numberOfShops), parseInt(input.numberOfShops));
       // else
       //   this.dataTable = new table( parseInt(input.numberOfShops), parseInt(input.numberOfShops), parseInt(input.totalResources));
-    // this.executeIter();
+      this.executeIter();
     }
   }
 
@@ -36,9 +36,9 @@ export class MinimiCostiComponent implements OnInit {
     var buyerI = 0;
     var sellerI = 0;
 
-    // await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // while( dataTable.sellersTotal.length != 0 && dataTable.buyersTotal != 0 ){
+    while( dataTable.sellersTotal.length != 0 && dataTable.buyersTotal != 0 ){
       let selectedIndexes = dataTable.findSmallestTransport();
       // console.log( selectedIndexes);
       sellerI = selectedIndexes[0];
@@ -57,9 +57,9 @@ export class MinimiCostiComponent implements OnInit {
           dataTable.removeRow(sellerI);
         }
         dataTable.sellersTotal[sellerI] -=tobuy;
-        dataTable.debug();
-        // continue;
-        return;
+        // dataTable.debug();
+        continue;
+        // return;
       }
 
       // se la richiesta é maggiore della domanda soddisfiamo la massima quantià che possiamo con il primo venditore disponibile
@@ -67,9 +67,9 @@ export class MinimiCostiComponent implements OnInit {
       dataTable.buyersTotal[buyerI] -= dataTable.sellersTotal[sellerI];
       dataTable.removeRow(sellerI);
 
-      // await new Promise(resolve => setTimeout(resolve, 2000));
-    // }
-    dataTable.debug();
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    }
+    // dataTable.debug();
     console.log( "endend minimi costi" );
 
   }

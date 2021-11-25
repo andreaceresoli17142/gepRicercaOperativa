@@ -61,9 +61,9 @@ export class AppComponent {
 
     // this.toChildForm = this.inputForm.value;
     if ( formOutput.totalResources == '' ){
-      this.toChildForm = new table( parseInt(formOutput.numberOfShops), parseInt(formOutput.numberOfShops));
+      this.toChildForm = JSON.stringify(new table( undefined, parseInt(formOutput.numberOfShops), parseInt(formOutput.numberOfShops)));
     }else{
-      this.toChildForm = new table( parseInt(formOutput.numberOfShops), parseInt(formOutput.numberOfShops), parseInt(formOutput.totalResources));
+      this.toChildForm = JSON.stringify(new table( undefined, parseInt(formOutput.numberOfShops), parseInt(formOutput.numberOfShops), parseInt(formOutput.totalResources)));
     }
     // this.toChildForm = new table( numberOfShops:0, numberOfSuppliers: 0, totalResources: '' );
 

@@ -19,13 +19,13 @@ export class DataElaborationComponent implements OnInit {
   @Input()
   set formInput(input:any){
     if ( input != undefined ){
-      this.dataTable = input.clone();
+      this.dataTable = new table(input);
     //   if ( input.totalResources == '' )
     //     this.dataTable = new table( parseInt(input.numberOfShops), parseInt(input.numberOfShops));
     //   else
     //     this.dataTable = new table( parseInt(input.numberOfShops), parseInt(input.numberOfShops), parseInt(input.totalResources));
 
-      // this.executeIter();
+      this.executeIter();
     }
   }
 
@@ -36,13 +36,13 @@ export class DataElaborationComponent implements OnInit {
 
   async executeIter(){
     // console.log( "started" );
-    // await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
     var dataTable = this.dataTable;
     var buyerI = 0;
     var sellerI = 0;
 
-    // while( dataTable.sellersTotal.length != 0 && dataTable.buyersTotal != 0 ){
+    while( dataTable.sellersTotal.length != 0 && dataTable.buyersTotal != 0 ){
       // se la richiesta é uguale o inferiore della domanda soddisfiamo completamente la richiesta con in primo venditore disponibile
       let tobuy = dataTable.buyersTotal[buyerI];
 
@@ -57,9 +57,9 @@ export class DataElaborationComponent implements OnInit {
           dataTable.removeRow(sellerI);
         }
         dataTable.sellersTotal[sellerI] -=tobuy;
-        dataTable.debug();
-        // continue;
-        return;
+        // dataTable.debug();
+        continue;
+        // return;
       }
 
       // se la richiesta é maggiore della domanda soddisfiamo la massima quantià che possiamo con il primo venditore disponibile
@@ -67,9 +67,9 @@ export class DataElaborationComponent implements OnInit {
       dataTable.buyersTotal[buyerI] -= dataTable.sellersTotal[sellerI];
       dataTable.removeRow(sellerI);
 
-    //   await new Promise(resolve => setTimeout(resolve, 2000));
-    // }
-    dataTable.debug();
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    }
+    // dataTable.debug();
     console.log( "endend nord ovest" );
 
   }

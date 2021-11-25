@@ -7,7 +7,20 @@ export class table{
   public transportCostMatrix: any = [];
   public totalResources:number;
 
-  constructor( sellers?: number, buyers?: number, totalResources?: number) {
+  public constructor( copiedData?:string, sellers?: number, buyers?: number, totalResources?: number) {
+
+    if ( copiedData != undefined ){
+
+      let p = JSON.parse(copiedData);
+      this.filled = p.filled;
+      this.rowHeaders = p.rowHeaders;
+      this.columnHeaders = p.columnHeaders;
+      this.buyersTotal = p.buyersTotal;
+      this.sellersTotal = p.sellersTotal;
+      this.transportCostMatrix = p.transportCostMatrix;
+      this.totalResources = p.totalResources;
+      return;
+    }
 
     if ( !sellers && !buyers){
       this.filled = false;
@@ -119,7 +132,7 @@ export class table{
     return [ sellerI, buyerI ];
   }
 
-  public clone( ){
+  /*public clone( ){
     var newObj = new table(1,1);
     newObj.filled = this.filled;
     newObj.rowHeaders = this.rowHeaders;
@@ -129,7 +142,7 @@ export class table{
     newObj.transportCostMatrix = this.transportCostMatrix;
     newObj.totalResources = this.totalResources;
     return newObj;
-  }
+  }*/
 
   public debug(){
 
