@@ -12,12 +12,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataElaborationComponent } from './data-elaboration/data-elaboration.component';
 import { MinimiCostiComponent } from './minimi-costi/minimi-costi.component';
+import { VogelComponent } from './vogel/vogel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DataElaborationComponent,
-    MinimiCostiComponent
+    MinimiCostiComponent,
+    VogelComponent
   ],
   imports: [
     NgbModule,

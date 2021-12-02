@@ -6,7 +6,7 @@
   <label for="number-of-suppliers">number of suppliers: </label>
   <input id="number-of-suppliers" type="number" formControlName="numberOfSuppliers" >
   <br>
-  <label for="total-resources">total resources (optional): </label>
+  <label for="total-resources">total resources: </label>
   <input id="total-resources" type="number" formControlName="totalResources" >
   <br>
   <div class="alert alert-danger" role="alert" *ngIf="formError !== undefined">{{formError}}</div>
@@ -15,9 +15,9 @@
   <br>
   <mat-checkbox formControlName="minimiCostiMethod" >Minimi costi</mat-checkbox>
   <br>
-  <mat-checkbox formControlName="vogelMethod" >Vogel</mat-checkbox>
+  <!-- <mat-checkbox formControlName="vogelMethod" >Vogel</mat-checkbox>
   <br>
-  <mat-checkbox formControlName="russelMethod" >Russel</mat-checkbox>
+  <mat-checkbox formControlName="russelMethod" >Russel</mat-checkbox> -->
   <br>
   <br>
   <button class="button" type="submit">submit</button>
@@ -29,3 +29,6 @@
 
 <br>
 <app-minimi-costi *ngIf="minimiCostiMethodFlag" [formInput]="toChildForm"></app-minimi-costi>
+
+<!-- <br>
+<app-vogel *ngIf="vogelMethodFlag" [formInput]="toChildForm"></app-vogel> -->

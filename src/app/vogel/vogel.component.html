@@ -1,0 +1,35 @@
+<div *ngIf="dataTable.filled">
+    <h3> vogel method</h3>
+    <table *ngIf="dataTable.sellersTotal.length != 0 && dataTable.buyersTotal != 0" id="users">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th *ngFor = "let column of dataTable.columnHeaders">
+            {{column}}
+          </th>
+          <th>total</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr *ngFor = "let row of dataTable.transportCostMatrix; index as i" >
+          <th> {{dataTable.rowHeaders[i]}} </th>
+          <td *ngFor = "let column of row" >
+            {{column}}
+          </td>
+          <td> {{dataTable.sellersTotal[i]}} </td>
+        </tr>
+        <tr>
+          <th>total</th>
+          <td *ngFor = "let singleBuyerRequest of dataTable.buyersTotal" >
+            {{singleBuyerRequest}}
+          </td>
+          <td>{{dataTable.totalResources}}</td>
+        </tr>
+      </tbody>
+    </table>
+    total cost:{{totalCost}}
+  </div>
+  
+<!-- <button (click)="debugF()"> reload table </button> -->
+<button (click)="executeIter()" > execute iter </button>

@@ -3,41 +3,57 @@ import {table} from 'src/assets/tableClass';
 import { Util } from 'src/assets/utilClass';
 
 @Component({
-  selector: 'app-data-elaboration',
-  templateUrl: './data-elaboration.component.html',
-  styleUrls: ['./data-elaboration.component.css']
+  selector: 'app-vogel',
+  templateUrl: './vogel.component.html',
+  styleUrls: ['./vogel.component.css']
 })
+export class VogelComponent implements OnInit {
 
-export class DataElaborationComponent implements OnInit {
-  // matrix:any = undefined;
-  // columnHeaders:any = undefined;
-  // rowHeaders:any = undefined;
   dataTable: table = new table();
   totalCost: number = 0;
   util!: Util;
+  // tempTable: table = new table();
 
   @Input()
   set formInput(input:any){
     if ( input != undefined ){
       this.dataTable = new table(input);
-      this.executeIter();
+      // this.tempTable = new table(input);
+      // this.executeIter();
     }
   }
 
   constructor() { }
-  
+
   ngOnInit(): void {
+
   }
-  
+
+  async executeIter0(){
+    
+    var dataTable = this.dataTable;
+    var buyerI = 0;
+    var sellerI = 0;
+    let totalSold = 0;
+      // se la richiesta é uguale o inferiore della domanda soddisfiamo completamente la richiesta con in primo venditore disponibile
+      let selectedIndexes = dataTable.getTableCoord_vogel();
+      console.log(selectedIndexes);
+
+  }
+
   async executeIter(){
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // await new Promise(resolve => setTimeout(resolve, 2000));
 
     var dataTable = this.dataTable;
     var buyerI = 0;
     var sellerI = 0;
     let totalSold = 0;
-    while( dataTable.sellersTotal.length > 0 && dataTable.buyersTotal.length > 0 ){
+    // while( dataTable.sellersTotal.length > 0 && dataTable.buyersTotal.length > 0 ){
       // se la richiesta é uguale o inferiore della domanda soddisfiamo completamente la richiesta con in primo venditore disponibile
+      // let selectedIndexes = dataTable.findSmallestTransport();
+      let selectedIndexes = dataTable.getTableCoord_vogel();
+      sellerI = selectedIndexes[0];
+      buyerI = selectedIndexes[1];
       let tobuy = dataTable.buyersTotal[buyerI];
 
       if ( tobuy <= dataTable.sellersTotal[sellerI] ){
@@ -47,17 +63,17 @@ export class DataElaborationComponent implements OnInit {
           dataTable.removeRow(sellerI);
         }
         dataTable.sellersTotal[sellerI] -=tobuy;
-        continue;
+        // continue;
+        return;
       }
       // se la richiesta é maggiore della domanda soddisfiamo la massima quantià che possiamo con il primo venditore disponibile
       this.totalCost += dataTable.sellersTotal[sellerI] * dataTable.transportCostMatrix[sellerI][buyerI];
       dataTable.buyersTotal[buyerI] -= dataTable.sellersTotal[sellerI];
       dataTable.removeRow(sellerI);
 
-      await new Promise(resolve => setTimeout(resolve, 2000));
-    }
-    // console.log( "endend nord ovest" );
+      // await new Promise(resolve => setTimeout(resolve, 2000));
+    // }
+    console.log( "endend nord ovest" );
 
   }
-
 }
