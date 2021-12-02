@@ -1,4 +1,4 @@
-<form [formGroup]="inputForm" (ngSubmit)="dataSubmit()" >
+<form [formGroup]="inputForm" (ngSubmit)="dataSubmit()" *ngIf="!execNO && !execVogel && !execMM" >
 
   <label for="number-of-shops">number of shops: </label>
   <input id="number-of-shops" type="number" formControlName="numberOfShops" >
@@ -25,10 +25,10 @@
 </form>
 
 <br>
-<app-data-elaboration *ngIf="nordOvestMethodFlag" [formInput]="toChildForm"></app-data-elaboration>
+<app-data-elaboration *ngIf="nordOvestMethodFlag" [formInput]="toChildForm" (eoe)="getNOflag($event)"></app-data-elaboration>
 
 <br>
-<app-minimi-costi *ngIf="minimiCostiMethodFlag" [formInput]="toChildForm"></app-minimi-costi>
+<app-minimi-costi *ngIf="minimiCostiMethodFlag" [formInput]="toChildForm" (eoe)="getMMflag($event)"></app-minimi-costi>
 
 <br>
-<app-vogel *ngIf="vogelMethodFlag" [formInput]="toChildForm"></app-vogel>
+<app-vogel *ngIf="vogelMethodFlag" [formInput]="toChildForm" (eoe)="getVflag($event)"></app-vogel>

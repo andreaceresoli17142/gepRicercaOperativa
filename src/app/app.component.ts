@@ -18,6 +18,10 @@ export class AppComponent {
   vogelMethodFlag = false;
   russelMethodFlag = false;
 
+  execNO = false;
+  execMM = false;
+  execVogel = false;
+
 
   toChildForm: any = undefined;
 
@@ -73,7 +77,28 @@ export class AppComponent {
     this.vogelMethodFlag = this.inputForm.value.vogelMethod;
     this.russelMethodFlag = this.inputForm.value.russelMethod;
 
+    this.execNO = this.nordOvestMethodFlag;
+    this.execMM = this.minimiCostiMethodFlag;
+    this.execVogel = this.vogelMethodFlag;
+
     this.inputForm.setValue( { numberOfShops:0, numberOfSuppliers: 0, totalResources: 0, nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false } );
+  }
+
+  getNOflag(event:any){
+    this.execNO = event;
+    console.log("fired no");
+  }
+
+  getMMflag(event:any){
+    this.execMM = event;
+    console.log("fired mm");
+
+  }
+
+  getVflag(event:any){
+    this.execVogel = event;
+    console.log("fired v");
+
   }
 
 }

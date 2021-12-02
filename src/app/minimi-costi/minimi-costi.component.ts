@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {table} from 'src/assets/tableClass';
 import { Util } from 'src/assets/utilClass';
 
@@ -14,6 +14,7 @@ export class MinimiCostiComponent implements OnInit {
   util!: Util;
   // tempTable: table = new table();
 
+  @Output() eoe:EventEmitter<boolean>= new EventEmitter();
   @Input()
   set formInput(input:any){
     if ( input != undefined ){
@@ -94,7 +95,7 @@ export class MinimiCostiComponent implements OnInit {
       await new Promise(resolve => setTimeout(resolve, 2000));
     }
     // console.log( "endend nord ovest" );
-
+    this.eoe.emit(false);
   }
 
   // debugF(){

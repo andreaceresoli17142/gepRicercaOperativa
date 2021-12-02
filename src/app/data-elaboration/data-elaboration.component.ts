@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {table} from 'src/assets/tableClass';
 import { Util } from 'src/assets/utilClass';
 
@@ -16,6 +16,7 @@ export class DataElaborationComponent implements OnInit {
   totalCost: number = 0;
   util!: Util;
 
+  @Output() eoe:EventEmitter<boolean>= new EventEmitter();
   @Input()
   set formInput(input:any){
     if ( input != undefined ){
@@ -57,7 +58,7 @@ export class DataElaborationComponent implements OnInit {
       await new Promise(resolve => setTimeout(resolve, 2000));
     }
     // console.log( "endend nord ovest" );
-
+    this.eoe.emit(false);
   }
 
 }
