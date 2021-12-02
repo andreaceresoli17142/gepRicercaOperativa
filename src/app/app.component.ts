@@ -86,18 +86,18 @@ export class AppComponent {
 
   getNOflag(event:any){
     this.execNO = event;
-    console.log("fired no");
+    // console.log("fired no");
   }
 
   getMMflag(event:any){
     this.execMM = event;
-    console.log("fired mm");
+    // console.log("fired mm");
 
   }
 
   getVflag(event:any){
     this.execVogel = event;
-    console.log("fired v");
+    // console.log("fired v");
 
   }
 
