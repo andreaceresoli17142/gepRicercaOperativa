@@ -15,9 +15,9 @@
   <br>
   <mat-checkbox formControlName="minimiCostiMethod" >Minimi costi</mat-checkbox>
   <br>
-  <!-- <mat-checkbox formControlName="vogelMethod" >Vogel</mat-checkbox>
+  <mat-checkbox formControlName="vogelMethod" >Vogel</mat-checkbox>
   <br>
-  <mat-checkbox formControlName="russelMethod" >Russel</mat-checkbox> -->
+  <mat-checkbox formControlName="russelMethod" *ngIf="false">Russel</mat-checkbox>
   <br>
   <br>
   <button class="button" type="submit">submit</button>
@@ -30,5 +30,5 @@
 <br>
 <app-minimi-costi *ngIf="minimiCostiMethodFlag" [formInput]="toChildForm"></app-minimi-costi>
 
-<!-- <br>
-<app-vogel *ngIf="vogelMethodFlag" [formInput]="toChildForm"></app-vogel> -->
+<br>
+<app-vogel *ngIf="vogelMethodFlag" [formInput]="toChildForm"></app-vogel>

@@ -26,9 +26,9 @@ export class AppComponent {
     numberOfSuppliers: new FormControl(0),
     totalResources: new FormControl(0),
     nordOvestMethod: new FormControl(false),
-    minimiCostiMethod: new FormControl(false)/*,
-    vogelMethod: new FormControl(true),
-    russelMethod: new FormControl(false),*/
+    minimiCostiMethod: new FormControl(false),
+    vogelMethod: new FormControl(false),
+    russelMethod: new FormControl(false),
   });
 
   dataSubmit(){
@@ -73,7 +73,7 @@ export class AppComponent {
     this.vogelMethodFlag = this.inputForm.value.vogelMethod;
     this.russelMethodFlag = this.inputForm.value.russelMethod;
 
-    this.inputForm.setValue( { numberOfShops:0, numberOfSuppliers: 0, totalResources: 0, nordOvestMethod: false, minimiCostiMethod: false/*, vogelMethod: false, russelMethod: false*/ } );
+    this.inputForm.setValue( { numberOfShops:0, numberOfSuppliers: 0, totalResources: 0, nordOvestMethod: false, minimiCostiMethod: false, vogelMethod: false, russelMethod: false } );
   }
 
 }

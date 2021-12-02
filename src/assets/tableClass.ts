@@ -173,7 +173,7 @@ export class table{
       if (mostCostlySeller < (secMinS - firstMinS)){
         mostCostlySeller = secMinS - firstMinS;
         choosedSeller = rInc;
-        console.log("mostcost seller: " + mostCostlySeller + " -> " + rInc );
+        // console.log("mostcost seller: " + mostCostlySeller + " -> " + choosedSeller );
       }
       // end of choosing seller
 
@@ -188,39 +188,46 @@ export class table{
       let firstMinCellB = 0;
       let secMinB = 101;
 
+      rInc = 0;
+
       for(let row of table){
         if (row[i] < firstMinB){
           firstMinB = row[i];
-          firstMinCellB = cInc;
-          cInc = (cInc+1)%table.length;
+          firstMinCellB = rInc;
+          // cInc = (cInc+1)%table.length;
+          // console.log("Selected first:" + firstMinB + " hpos " +firstMinCellB);
         }
+        rInc++;
       }
 
-      cInc = 0
+      rInc = 0;
 
       for(let row of table){
-        if (row[i] < secMinB && (cInc+1)%table.length != firstMinCellB){
+        // console.log("selecting second from:" + row[i] + " && " + rInc);
+        if (row[i] < secMinB && rInc != firstMinCellB){
           secMinB = row[i];
-          firstMinCellB = (cInc+1)%table.length;
-          cInc = (cInc+1)%table.length;
+          // console.log("Selected second:" + secMinB + " avoiding " +firstMinCellB);
+          // firstMinCellB = rInc;
+          // cInc = (cInc+1)%table.length;
         }
+        rInc++;
       }
-      console.log(secMinB + ":" + firstMinB);
+      // console.log(secMinB + ":" + firstMinB);
       if (mostCostlyBuyer < (secMinB - firstMinB)){
         mostCostlyBuyer = secMinB - firstMinB;
-        console.log(((cInc))%table.length);
-        choosedBuyer = ((cInc))%table.length;
-        if (choosedBuyer == -1 ){
-          choosedBuyer = table.length -1;
-        }
-        console.log(cInc + " -- " +table.length);
-        console.log("mostcost buyer: " + mostCostlyBuyer + " -> " + choosedBuyer );
+        // console.log(i);
+        choosedBuyer = i;
+        // if (choosedBuyer == -1 ){
+        //   choosedBuyer = table.length -1;
+        // }
+        // console.log(cInc + " -- " +table.length);
+        // console.log("mostcost buyer: " + mostCostlyBuyer + " -> " + choosedBuyer );
       }
 
-      rInc++;
+      // cInc++;
     }
 
-    console.log("returning: " + choosedSeller + ":" + choosedBuyer);
+    // console.log("returning: " + choosedSeller + ":" + choosedBuyer);
     // this.count();
     return [choosedSeller, choosedBuyer];
   }
